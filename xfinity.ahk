@@ -3,12 +3,13 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+#singleinstance, force
 
 ; required library for finding and clicking buttons
 #Include FindText.ahk ; https://www.autohotkey.com/boards/viewtopic.php?t=17834
 
 ; tray icon
-Menu, Tray, Icon, %A_ScriptDir%\xfinity.ico
+Menu, Tray, Icon, %A_ScriptDir%\xfinity\xfinity.ico
 
 ;-------------------------------------------------------------------------------
 ; ======================================
@@ -25,7 +26,7 @@ cmd_timeout_sec = 10 ; time to wait for command prompt to respond
 timeout_sec := 120 ; time to wait for internet to connect
 timer_frequency_ms := 600 ; how often to look for buttons to click
 wait_browser_action_ms := 200 ; how long to pause for browser to respond
-reset_internet_period_ms := 3600000 ; reset internet every hour
+reset_internet_period_ms := 3570000 ; reset internet every hour
 
 Loop ; get complimentary hour of internet
 { 
@@ -215,10 +216,6 @@ countdown_timer_app(){
     else
     {
         SetTimer, Click_text6, Off
-        ControlSend, , {F11}, Mozilla Firefox ; restore window size
-        Sleep %wait_browser_action_ms%
-        Send ^w; close the browser tab
-        Sleep %wait_browser_action_ms%
         IfWinExist  ahk_exe HourglassPortable.exe
         {
             WinClose, ahk_exe HourglassPortable.exe
@@ -239,6 +236,12 @@ countdown_timer_app(){
             Send D:\Tools\HourglassPortable.exe "59"{ENTER}
             Send Exit{ENTER}
         }
+    	WinActivate Mozilla Firefox
+	WinWaitActive Mozilla Firefox, , %timeout_sec%
+        ControlSend, , {F11}, Mozilla Firefox ; restore window size
+        Sleep %wait_browser_action_ms%
+        Send ^w ; close the browser tab
+        Sleep %wait_browser_action_ms%
     }
 }
 
