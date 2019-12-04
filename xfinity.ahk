@@ -9,7 +9,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include FindText.ahk ; https://www.autohotkey.com/boards/viewtopic.php?t=17834
 
 ; tray icon
-Menu, Tray, Icon, %A_ScriptDir%\xfinity\xfinity.ico
+Menu, Tray, Icon, %A_ScriptDir%\icons\xfinity.ico
 
 ;-------------------------------------------------------------------------------
 ; ======================================
